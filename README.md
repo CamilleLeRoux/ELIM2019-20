@@ -28,7 +28,20 @@ Un utilisateur part en soirée, il souhaite contrôler les accès à son télép
  - Il existe des applications pour verrouiller des applications (outils de productivité)
  - Sur IOS et Android plusieurs applications permettent de calculer la quantité d’alcool dans le sang en fonction du nombre de verres consommés. 
  - Sur IOS, une application appelé Drunk Mode-Call blocker permet de retracer les mouvements de la soirée, de prévenir les amis que l’on est rentré chez sois, de bloquer des numéros et voir les autres utilisateurs sur une carte. 
- 
+
+## Architecture du projet 
+ - Partie 1: partie graphique, grâce aux actions utilisateurs acquisition des données
+ - Partie 2: Traitement et apprentissage avec les données acquise
+ - Partie 3: Restitution des informations
+     - Utilisateur à trop bu ou non
+     - Etat de l’utilisateur durant la semaine (optionel)
+
+## Capteurs
+Accéléromètre, pas de marque/téléphone particulier.
+
+## Technologie utilisée 
+Nous avons choisi d’utiliser la technologie Flutter. En effet Flutter est facile à prendre en main et elle permet d’accéder facilement aux capteurs grâce à des plugins. De plus notre application ayant une interaction importante avec les utilisateurs, l’interface doit être soigné ce qui est facile grâce à Flutter.
+
  
 ## Etudiants : 
 Marion Marguerettaz
