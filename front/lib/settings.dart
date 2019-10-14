@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
+import 'package:front/sentence.dart';
 import 'package:intl/intl.dart';
 
 import 'main.dart';
@@ -118,6 +119,11 @@ class SettingsFormState extends State<Settings>{
                           _settingsModel.friendsNumber + "\nAdresse " +
                           _settingsModel.address + "\n Horaire " +
                           _settingsModel.beginningParty.toString());
+                      Navigator.push(context,
+                          MaterialPageRoute(
+                              builder: (context) => Sentence()
+                          )
+                      );
                       }
                   },
                   child: Text('Enregistrer'),

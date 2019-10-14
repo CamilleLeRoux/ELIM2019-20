@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:front/sentence.dart';
 import 'settings.dart';
 
-void main() => runApp(MyApp());
+void main() {
+  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
+  runApp(MyApp());
+}
 
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
@@ -69,6 +74,24 @@ class _MyHomePageState extends State<MyHomePage> {
               },
               child: Text(
                 "Commencer le test!",
+              ),
+            ),
+            FlatButton(
+              color: Colors.blue,
+              textColor: Colors.white,
+              disabledColor: Colors.grey,
+              disabledTextColor: Colors.black,
+              padding: EdgeInsets.all(8.0),
+              splashColor: Colors.blueAccent,
+              onPressed: () {
+                Navigator.push(context,
+                    MaterialPageRoute(
+                        builder: (context) => Sentence()
+                    )
+                );
+              },
+              child: Text(
+                "Phrase",
               ),
             )
           ],
