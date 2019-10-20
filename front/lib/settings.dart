@@ -5,6 +5,7 @@ import 'package:intl/intl.dart';
 
 import 'main.dart';
 import 'settingsModel.dart';
+import 'package:front/colors.dart';
 
 class Settings extends StatefulWidget {
   @override
@@ -31,8 +32,10 @@ class SettingsFormState extends State<Settings>{
     return Scaffold(
       appBar: AppBar(
         title: Text("Paramètre"),
+        backgroundColor: PrimaryColor,
       ),
       body: Container(
+        decoration: new BoxDecoration(color: PrimaryColor),
         padding:
         const EdgeInsets.symmetric(vertical: 16.0, horizontal: 16.0),
         child: Builder(
@@ -43,7 +46,15 @@ class SettingsFormState extends State<Settings>{
               children: <Widget>[
                 TextFormField(
                     decoration: InputDecoration(
-                        labelText: 'Prénom'
+                        labelText: 'Prénom',
+                        labelStyle: TextStyle(
+                            color: Colors.white
+                        ),
+                        fillColor: Colors.white,
+                        focusedBorder: OutlineInputBorder(
+                          borderSide: const BorderSide(color: Colors.white, width: 2.0),
+                          borderRadius: BorderRadius.circular(25.0),
+                        )
                     ),
                     validator: (value) {
                      if(value.isEmpty){
@@ -66,18 +77,29 @@ class SettingsFormState extends State<Settings>{
                     },
                     child: Text(
                       'Choisi l\'heure de début de soirée!',
-                      style: TextStyle(color: Colors.blue),
+                      style: TextStyle(color: Colors.white),
                     )
                 ),
                 Text(
                   '$_time',
                   textAlign: TextAlign.center,
                   overflow: TextOverflow.ellipsis,
-                  style: TextStyle(fontWeight: FontWeight.bold),
+                  style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white
+                  ),
                 ),
                 TextFormField(
                   decoration: InputDecoration(
-                      labelText: 'Téléphone d\'un ami'
+                      labelText: 'Téléphone d\'un ami',
+                      labelStyle: TextStyle(
+                          color: Colors.white
+                      ),
+                      fillColor: Colors.white,
+                      focusedBorder: OutlineInputBorder(
+                        borderSide: const BorderSide(color: Colors.white, width: 2.0),
+                        borderRadius: BorderRadius.circular(25.0),
+                      )
                   ),
                   validator: (value) {
                     RegExp exp = new RegExp("^(?:(?:\\+|00)33|0)\\s*[1-9](?:[\\s"
@@ -95,7 +117,15 @@ class SettingsFormState extends State<Settings>{
                 ),
                 TextFormField(
                   decoration: InputDecoration(
-                      labelText: 'Adresse où tu vas dormir ce soir!'
+                      labelText: 'Adresse où tu vas dormir ce soir!',
+                      labelStyle: TextStyle(
+                        color: Colors.white
+                      ),
+                      fillColor: Colors.white,
+                      focusedBorder: OutlineInputBorder(
+                        borderSide: const BorderSide(color: Colors.white, width: 2.0),
+                        borderRadius: BorderRadius.circular(25.0),
+                      )
                   ),
                   validator: (value) {
                     if (value.isEmpty) {
@@ -107,6 +137,8 @@ class SettingsFormState extends State<Settings>{
                       value),
                 ),
                 RaisedButton(
+                  color: PrimaryAssentColor,
+                  textColor: Colors.white,
                   onPressed: () {
                     final form = _formKey.currentState;
                     if (form.validate()) {

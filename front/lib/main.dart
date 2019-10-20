@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:front/sentence.dart';
 import 'settings.dart';
+import 'package:front/Mouvement/CountMouvement.dart';
+import 'package:front/colors.dart';
 
 void main() {
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
@@ -16,6 +18,7 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Demo',
       theme: ThemeData(
         primarySwatch: Colors.blue,
+
       ),
       home: MyHomePage(title: 'ELIM 2019-20'),
     );
@@ -24,16 +27,6 @@ class MyApp extends StatelessWidget {
 
 class MyHomePage extends StatefulWidget {
   MyHomePage({Key key, this.title}) : super(key: key);
-
-  // This widget is the home page of your application. It is stateful, meaning
-  // that it has a State object (defined below) that contains fields that affect
-  // how it looks.
-
-  // This class is the configuration for the state. It holds the values (in this
-  // case the title) provided by the parent (in this case the App widget) and
-  // used by the build method of the State. Fields in a Widget subclass are
-  // always marked "final".
-
   final String title;
 
   @override
@@ -44,40 +37,56 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
-    // This method is rerun every time setState is called, for instance as done
-    // by the _incrementCounter method above.
-    //
-    // The Flutter framework has been optimized to make rerunning build methods
-    // fast, so that you can just rebuild anything that needs updating rather
-    // than having to individually change instances of widgets.
     return Scaffold(
+      backgroundColor: PrimaryColor,
       appBar: AppBar(
-        title: Text(widget.title),
+        title: Row(
+            children: [
+              Image.asset(
+                'assets/icon.png',
+                fit: BoxFit.contain,
+                height: 32,
+              ),
+              Container(
+                  padding: const EdgeInsets.all(8.0), child: Text(widget.title))
+            ],
+        ),
+          actions: <Widget>[
+          // action button
+          IconButton(
+            icon: Icon(Icons.settings),
+            onPressed: () {
+              Navigator.push(context,
+                  MaterialPageRoute(
+                      builder: (context) => Settings()
+                  )
+              );
+            },
+          ),
+        ],
+        backgroundColor: PrimaryColor,
       ),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
+
             FlatButton(
-              color: Colors.blue,
+              color: PrimaryAssentColor,
               textColor: Colors.white,
               disabledColor: Colors.grey,
               disabledTextColor: Colors.black,
               padding: EdgeInsets.all(8.0),
-              splashColor: Colors.blueAccent,
+              splashColor: Colors.blueGrey[100],
               onPressed: () {
-                Navigator.push(context,
-                    MaterialPageRoute(
-                        builder: (context) => Settings()
-                    )
-                );
+
               },
               child: Text(
                 "Commencer le test!",
               ),
             ),
             FlatButton(
-              color: Colors.blue,
+              color: PrimaryAssentColor,
               textColor: Colors.white,
               disabledColor: Colors.grey,
               disabledTextColor: Colors.black,
@@ -93,9 +102,28 @@ class _MyHomePageState extends State<MyHomePage> {
               child: Text(
                 "Phrase",
               ),
-            )
+            ),
+            FlatButton(
+              color: PrimaryAssentColor,
+              textColor: Colors.white,
+              disabledColor: Colors.grey,
+              disabledTextColor: Colors.black,
+              padding: EdgeInsets.all(8.0),
+              splashColor: Colors.blueAccent,
+              onPressed: () {
+                Navigator.push(context,
+                    MaterialPageRoute(
+                        builder: (context) => CountMouvement()
+                    )
+                );
+              },
+              child: Text(
+                "Mouvement",
+              ),
+            ),
           ],
         ),
+
       ), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }

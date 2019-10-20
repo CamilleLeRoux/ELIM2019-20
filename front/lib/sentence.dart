@@ -3,6 +3,7 @@ import 'package:front/failure.dart';
 import 'dart:async';
 
 import 'package:front/succes.dart';
+import 'package:front/colors.dart';
 
 class Sentence extends StatefulWidget {
   @override
@@ -60,16 +61,21 @@ class SentenceFormState extends State<Sentence>{
 
   Widget build(BuildContext context) {
     return new Scaffold(
-      appBar: AppBar(title: Text("Test de la phrase")),
+      backgroundColor: PrimaryColor,
+      appBar: AppBar(title: Text("Test de la phrase"),backgroundColor: PrimaryColor),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Container(
                 margin : EdgeInsets.only( bottom: 270.0, top: 25),
-                child: Text("$_start", style: TextStyle(fontSize: 40),)
+                child: Text("$_start",
+                  style: TextStyle(
+                      fontSize: 40,
+                      color: Colors.white)
+                )
             ),
-            Text(sentence, style: TextStyle(fontSize: 30)),
+            Text(sentence, style: TextStyle(fontSize: 30, color: Colors.white)),
             Padding(
               padding: EdgeInsets.all(20),
             ),
@@ -79,7 +85,16 @@ class SentenceFormState extends State<Sentence>{
                 controller: controller,
                 autocorrect: false,
                 decoration: InputDecoration(
-                    labelText: 'Rentrez ici la phrase ci-dessus'
+                    labelText: 'Rentrez ici la phrase ci-dessus',
+                    labelStyle: TextStyle(
+                        color: Colors.white
+                    ),
+                    hoverColor: Colors.white,
+                    fillColor: Colors.white,
+                    focusedBorder: OutlineInputBorder(
+                      borderSide: const BorderSide(color: Colors.white, width: 2.0),
+                      borderRadius: BorderRadius.circular(25.0),
+                    )
                 ),
                 onFieldSubmitted: (term) {
                   verif();
