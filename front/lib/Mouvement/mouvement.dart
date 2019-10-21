@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:front/Sentence/failure.dart';
 import 'package:sensors/sensors.dart';
 import 'dart:math';
 import 'dart:async';
 import 'dart:convert';
 
-import 'package:front/failure.dart';
-import 'package:front/succes.dart';
+import 'package:front/Sentence/succes.dart';
 import 'package:front/colors.dart';
 
 class Mouvement extends StatefulWidget{

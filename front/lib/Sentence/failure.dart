@@ -1,14 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class Failure extends StatefulWidget {
-  @override
-  FailureState createState() => new FailureState();
-}
+class Failure extends StatelessWidget {
 
-class FailureState extends State<Failure> {
-
-
+  final int score;
+  Failure({Key key, @required this.score}) : super();
 
   @override
   Widget build(BuildContext context) {
@@ -18,6 +14,7 @@ class FailureState extends State<Failure> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Text("Failure !!!", style: TextStyle(color: Colors.black),),
+            Text(score.toString() + "/4", style: TextStyle(color: Colors.black),),
           ],
         ))
     );

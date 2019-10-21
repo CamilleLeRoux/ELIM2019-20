@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
-import 'package:front/sentence.dart';
 import 'package:intl/intl.dart';
 
+import 'Sentence/sentence.dart';
 import 'main.dart';
 import 'settingsModel.dart';
 import 'package:front/colors.dart';

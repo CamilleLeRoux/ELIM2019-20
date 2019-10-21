@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:front/failure.dart';
 import 'dart:async';
+import 'dart:math' show Random;
 
-import 'package:front/succes.dart';
+import 'package:front/Sentence/succes.dart';
 import 'package:front/colors.dart';
+
+import 'failure.dart';
 
 class Sentence extends StatefulWidget {
   @override
@@ -18,10 +20,25 @@ class SentenceFormState extends State<Sentence>{
   final controller = TextEditingController();
   Timer _timer;
   int _start = 15;
-  String sentence= "les patates fluo";
+  var word1 = ["les", "la", "le", "des", "une", "un"];
+  var word2 = ["patates", "asperges", "avions", "pedoncule", "casquette", "bidulle"];
+  var word3 = ["sont", "vont", "mange", "volent", "gratte", "vendent"];
+  var word4 = ["fluo", "bananes", "pizzas", "livre", "Amerique", "flutter"];
+  var choose = [];
+  String sentence = "";
 
   @override
   void initState() {
+    var randomizer = new Random();
+    int rand1 = randomizer.nextInt(5);
+    int rand2 = randomizer.nextInt(5);
+    int rand3 = randomizer.nextInt(5);
+    int rand4 = randomizer.nextInt(5);
+    choose.add(rand1);
+    choose.add(rand2);
+    choose.add(rand3);
+    choose.add(rand4);
+    sentence = word1[rand1] + " " + word2[rand2] + " " + word3[rand3] + " " + word4[rand4];
     super.initState();
   }
 
@@ -32,19 +49,7 @@ class SentenceFormState extends State<Sentence>{
           (Timer timer) => setState(
             () {
           if (_start <= 0) {
-            timer.cancel();
-            if(controller.text == sentence){
-              Navigator.push(context,
-                  MaterialPageRoute(
-                      builder: (context) => Success()
-                  )
-              );
-            }
-            Navigator.push(context,
-                MaterialPageRoute(
-                    builder: (context) => Failure()
-                )
-            );
+            verif();
           } else {
             _start = _start - 1;
           }
@@ -68,7 +73,7 @@ class SentenceFormState extends State<Sentence>{
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Container(
-                margin : EdgeInsets.only( bottom: 270.0, top: 25),
+                margin : EdgeInsets.only( bottom: 200.0, top: 25),
                 child: Text("$_start",
                   style: TextStyle(
                       fontSize: 40,
@@ -110,16 +115,25 @@ class SentenceFormState extends State<Sentence>{
   }
 
   void verif(){
-    if(controller.text == sentence){
+    int score = 0;
+    var w = controller.text.split(" ");
+    if(w[0] == word1[choose[0]]) ++score;
+    if(w[1] == word2[choose[1]]) ++score;
+    if(w[2] == word3[choose[2]]) ++score;
+    if(w[3] == word4[choose[3]]) ++score;
+    print("Score : " + score.toString());
+    if(score == 4){
+      _timer.cancel();
       Navigator.push(context,
           MaterialPageRoute(
-              builder: (context) => Success()
+              builder: (context) => Success(score: score,)
           )
       );
     }else{
+      _timer.cancel();
       Navigator.push(context,
           MaterialPageRoute(
-              builder: (context) => Failure()
+              builder: (context) => Failure(score: score,)
           )
       );
     }

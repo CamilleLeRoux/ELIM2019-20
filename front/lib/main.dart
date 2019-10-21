@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:front/sentence.dart';
+import 'Sentence/sentence.dart';
 import 'settings.dart';
 import 'package:front/Mouvement/CountMouvement.dart';
 import 'package:front/colors.dart';
