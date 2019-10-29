@@ -64,10 +64,20 @@ class SentenceFormState extends State<Sentence>{
     super.dispose();
   }
 
+  Future<bool> _willPopCallback() async {
+    return false;
+  }
+
   Widget build(BuildContext context) {
-    return new Scaffold(
+
+    return new WillPopScope(child: Scaffold(
       backgroundColor: PrimaryColor,
-      appBar: AppBar(title: Text("Test de la phrase"),backgroundColor: PrimaryColor),
+      appBar: AppBar(
+          title: Text("Test de la phrase"),
+          backgroundColor: PrimaryColor,
+          automaticallyImplyLeading: false
+      ),
+
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -75,9 +85,9 @@ class SentenceFormState extends State<Sentence>{
             Container(
                 margin : EdgeInsets.only( bottom: 200.0, top: 25),
                 child: Text("$_start",
-                  style: TextStyle(
-                      fontSize: 40,
-                      color: Colors.white)
+                    style: TextStyle(
+                        fontSize: 40,
+                        color: Colors.white)
                 )
             ),
             Text(sentence, style: TextStyle(fontSize: 30, color: Colors.white)),
@@ -111,7 +121,7 @@ class SentenceFormState extends State<Sentence>{
           ],
         ),
       ),
-    );
+    ), onWillPop: _willPopCallback);
   }
 
   void verif(){

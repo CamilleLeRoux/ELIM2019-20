@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'dart:async';
 import 'package:front/Mouvement/mouvement.dart';
-import 'dart:developer' as developer;
 import 'package:front/colors.dart';
 
 class CountMouvement extends StatefulWidget {
+
+  int counterPage;
+
+  CountMouvement(this.counterPage, {Key key}): super(key: key);
   @override
   CountMouvementFormState createState(){
     return CountMouvementFormState();
@@ -15,6 +18,7 @@ class CountMouvementFormState extends State<CountMouvement>{
 
   Timer _timer;
   int _start = 2;
+  int _counterPage = 0;
 
   @override
   void initState() {
@@ -22,12 +26,18 @@ class CountMouvementFormState extends State<CountMouvement>{
     startTimer();
   }
 
+  Future<bool> _willPopCallback() async {
+    return false;
+  }
+
   Widget build(BuildContext context) {
-    return new Scaffold(
+
+    return new WillPopScope(child: Scaffold(
       backgroundColor: PrimaryColor,
       appBar: AppBar(
-        title: Text("Test de la phrase"),
-        backgroundColor: PrimaryColor,
+          title: Text("Test de la phrase"),
+          backgroundColor: PrimaryColor,
+          automaticallyImplyLeading: false
       ),
       body: Center(
         child: Column(
@@ -50,7 +60,7 @@ class CountMouvementFormState extends State<CountMouvement>{
           ],
         ),
       ),
-    );
+    ), onWillPop: _willPopCallback);
   }
 
 
@@ -59,10 +69,11 @@ class CountMouvementFormState extends State<CountMouvement>{
     _timer = new Timer.periodic(
       oneSec, (Timer timer) => setState(() {
         if (_start <= 0) {
+          widget.counterPage++;
           timer.cancel();
           Navigator.push(context,
               MaterialPageRoute(
-                  builder: (context) => Mouvement()
+                  builder: (context) => Mouvement( widget.counterPage)
               )
           );
         } else {
@@ -72,7 +83,4 @@ class CountMouvementFormState extends State<CountMouvement>{
       ),
     );
   }
-
-
-
 }

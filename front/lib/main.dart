@@ -113,7 +113,7 @@ class _MyHomePageState extends State<MyHomePage> {
               onPressed: () {
                 Navigator.push(context,
                     MaterialPageRoute(
-                        builder: (context) => CountMouvement()
+                        builder: (context) => CountMouvement(0)
                     )
                 );
               },
