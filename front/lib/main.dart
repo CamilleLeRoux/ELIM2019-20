@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:front/testBdd.dart';
 import 'Sentence/sentence.dart';
 import 'settings.dart';
 import 'package:front/Mouvement/CountMouvement.dart';
 import 'package:front/colors.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 void main() {
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
@@ -79,7 +81,11 @@ class _MyHomePageState extends State<MyHomePage> {
               padding: EdgeInsets.all(8.0),
               splashColor: Colors.blueGrey[100],
               onPressed: () {
-
+                Navigator.push(context,
+                    MaterialPageRoute(
+                        builder: (context) => TestBdd()
+                    )
+                );
               },
               child: Text(
                 "Commencer le test!",

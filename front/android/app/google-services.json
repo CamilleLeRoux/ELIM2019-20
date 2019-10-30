@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "162843078969",
+    "firebase_url": "https://elim-2019.firebaseio.com",
+    "project_id": "elim-2019",
+    "storage_bucket": "elim-2019.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:162843078969:android:10d6820f859f7b1cbcb8e8",
+        "android_client_info": {
+          "package_name": "com.example.front"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "162843078969-buva3klvcnrbev66jgr8r0m14kd21449.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCD3gmZEjcIJfrPW-2j1qWCY-ENtYtIxAA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "162843078969-buva3klvcnrbev66jgr8r0m14kd21449.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
