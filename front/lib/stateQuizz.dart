@@ -10,6 +10,8 @@ class StateQuizz {
   static final StateQuizz _instance = StateQuizz._internal();
 
   var tests = ["mvt", "sentence"];
+  var comingFromMain = false;
+  StatefulWidget widgetFromMain;
 
 
   factory StateQuizz(){
@@ -18,23 +20,36 @@ class StateQuizz {
 
   StateQuizz._internal();
 
-  StatefulWidget getNextTest(){
+  StatefulWidget getNextTest(comingFrom){
     if(tests.isEmpty){
       print("fin du quizz");
       return Settings();
     }else{
-      print(tests);
-      var value = chooseTest();
-      print("va chercher une autre page " + value.toString() + "  "
-          + tests[value]);
-      if(tests[value] == "mvt") {
-        tests.removeAt(value);
-        return CountMouvement(0);
+
+      if(!comingFromMain) {
+        comingFromMain = true;
+        print(tests);
+        widgetFromMain = launchWidget(chooseTest());
+        return widgetFromMain;
       }
-      else if(tests[value] == "sentence") {
-        tests.removeAt(value);
-        return Sentence();
+      else if(comingFrom == ""){
+        return launchWidget(chooseTest());
       }
+      else{
+        return widgetFromMain;
+      }
+    }
+  }
+  StatefulWidget launchWidget(value){
+    print("va chercher une autre page " + value.toString() + "  "
+        + tests[value]);
+    if (tests[value] == "mvt") {
+      tests.removeAt(value);
+      return CountMouvement(0);
+    }
+    else if (tests[value] == "sentence") {
+      tests.removeAt(value);
+      return Sentence();
     }
   }
 

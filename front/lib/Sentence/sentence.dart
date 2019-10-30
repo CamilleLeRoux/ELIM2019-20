@@ -48,7 +48,8 @@ class SentenceFormState extends State<Sentence>{
           (Timer timer) => setState(
             () {
           if (_start <= 0) {
-            verif();
+            _timer.cancel();
+            this.verif();
           } else {
             _start = _start - 1;
           }
@@ -69,58 +70,63 @@ class SentenceFormState extends State<Sentence>{
 
   Widget build(BuildContext context) {
 
-    return new WillPopScope(child: Scaffold(
-      backgroundColor: PrimaryColor,
-      appBar: AppBar(
-          title: Text("Test de la phrase"),
+    return new WillPopScope(
+        child: new Scaffold(
           backgroundColor: PrimaryColor,
-          automaticallyImplyLeading: false
-      ),
+          appBar: new AppBar(
+            title: new Text("Test de la phrase"),
+            backgroundColor: PrimaryColor,
+            automaticallyImplyLeading: false
+          ),
 
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Container(
-                margin : EdgeInsets.only( bottom: 200.0, top: 25),
-                child: Text("$_start",
-                    style: TextStyle(
-                        fontSize: 40,
-                        color: Colors.white)
-                )
-            ),
-            Text(sentence, style: TextStyle(fontSize: 30, color: Colors.white)),
-            Padding(
-              padding: EdgeInsets.all(20),
-            ),
-            Container(
-              margin : EdgeInsets.only( bottom: 30.0),
-              child: TextFormField(
-                controller: controller,
-                autocorrect: false,
-                decoration: InputDecoration(
-                    labelText: 'Rentrez ici la phrase ci-dessus',
-                    labelStyle: TextStyle(
-                        color: Colors.white
+          body: new Center(
+            child: new SingleChildScrollView(
+              child: new Container(
+                margin: EdgeInsets.fromLTRB(10.0, 20.0, 10.0, 10.0),
+                child: new Column(children: <Widget>[
+                  new Container(
+                      child: Text("$_start",
+                          style: TextStyle(
+                              fontSize: 40,
+                              color: Colors.white)
+                      )
+                  ),
+                  new Text(sentence, style: TextStyle(fontSize: 20, color:
+                  Colors.white)),
+                  new Padding(
+                    padding: EdgeInsets.all(10),
+                  ),
+                  new Container(
+                    child: new TextFormField(
+                      controller: controller,
+                      autocorrect: false,
+                      decoration: new InputDecoration(
+                          labelText: 'Rentrez ici la phrase ci-dessus',
+                          labelStyle: new TextStyle(
+                              color: Colors.white
+                          ),
+                          hoverColor: Colors.white,
+                          fillColor: Colors.white,
+                          focusedBorder: new OutlineInputBorder(
+                            borderSide: const BorderSide(color: Colors.white, width: 2.0),
+                            borderRadius: BorderRadius.circular(25.0),
+                          )
+                      ),
+                      onFieldSubmitted: (term) {
+                        verif();
+                      },
+                      textInputAction: TextInputAction.go,
+                      onTap: startTimer,
                     ),
-                    hoverColor: Colors.white,
-                    fillColor: Colors.white,
-                    focusedBorder: OutlineInputBorder(
-                      borderSide: const BorderSide(color: Colors.white, width: 2.0),
-                      borderRadius: BorderRadius.circular(25.0),
-                    )
+                  ),
+
+                  ],
                 ),
-                onFieldSubmitted: (term) {
-                  verif();
-                },
-                textInputAction: TextInputAction.go,
-                onTap: startTimer,
               ),
-            )
-          ],
-        ),
-      ),
-    ), onWillPop: _willPopCallback);
+            ),
+          ),
+
+        ), onWillPop: _willPopCallback);
   }
 
   void verif(){
@@ -136,14 +142,14 @@ class SentenceFormState extends State<Sentence>{
       _timer.cancel();
       Navigator.push(context,
           MaterialPageRoute(
-              builder: (context) => Success(score: score,)
+              builder: (context) => Success(score: score)
           )
       );
     }else{
       _timer.cancel();
       Navigator.push(context,
           MaterialPageRoute(
-              builder: (context) => Failure(score: score,)
+              builder: (context) => Failure(score: score)
           )
       );
     }

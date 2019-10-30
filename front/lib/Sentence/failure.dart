@@ -9,11 +9,12 @@ class Failure extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print("ICI");
     return new GestureDetector(
       onTap: (){
         Navigator.push(context,
             MaterialPageRoute(
-                builder: (context) => StateQuizz().getNextTest()
+                builder: (context) => StateQuizz().getNextTest("")
             )
         );
       },
