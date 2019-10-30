@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:front/testBdd.dart';
 import 'Sentence/sentence.dart';
 import 'settings.dart';
 import 'package:front/Mouvement/CountMouvement.dart';
 import 'package:front/colors.dart';
 import 'package:front/stateQuizz.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 void main() {
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
