@@ -9,6 +9,7 @@ import 'dart:async';
 
 import 'package:front/Sentence/succes.dart';
 import 'package:front/colors.dart';
+import 'package:front/stateQuizz.dart';
 
 class Mouvement extends StatefulWidget{
   final int counterPage;
@@ -128,38 +129,21 @@ class MouvementFormState extends State<Mouvement>{
         if (_start <= 0) {
           timer.cancel();
           accel.cancel();
-          print(widget.counterPage);
-          if(widget.counterPage < 3) {
+          if(widget.counterPage == 3){
+            Navigator.push(context,
+                MaterialPageRoute(
+                    builder: (context) => StateQuizz().getNextTest()
+                )
+            );
+          }
+          if (widget.counterPage < 3) {
             Navigator.push(context,
                 MaterialPageRoute(
                     builder: (context) => CountMouvement(widget.counterPage)
                 )
             );
           }
-          else{
-
-            //NEXT PAGE
-            Navigator.push(context,
-                MaterialPageRoute(
-                    builder: (context) => MyApp()
-                )
-            );
-          }
-          }/*
-          if(_success) {
-            Navigator.push(context,
-                MaterialPageRoute(
-                    builder: (context) => Success()
-                )
-            );
-          }
-          else {
-            Navigator.push(context,
-                MaterialPageRoute(
-                    builder: (context) => Failure()
-                )
-            );
-          }*/
+        }
          else {
           _start = _start - 1;
         }

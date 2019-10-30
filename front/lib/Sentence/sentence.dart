@@ -5,14 +5,13 @@ import 'dart:math' show Random;
 import 'package:front/Sentence/succes.dart';
 import 'package:front/colors.dart';
 
-import 'failure.dart';
+import 'package:front/Sentence/failure.dart';
 
 class Sentence extends StatefulWidget {
   @override
   SentenceFormState createState(){
     return SentenceFormState();
   }
-
 }
 
 class SentenceFormState extends State<Sentence>{
@@ -132,6 +131,7 @@ class SentenceFormState extends State<Sentence>{
     if(w[2] == word3[choose[2]]) ++score;
     if(w[3] == word4[choose[3]]) ++score;
     print("Score : " + score.toString());
+
     if(score == 4){
       _timer.cancel();
       Navigator.push(context,
