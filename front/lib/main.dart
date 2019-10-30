@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:front/ligneDroite.dart';
 import 'package:front/testBdd.dart';
 import 'Sentence/sentence.dart';
 import 'settings.dart';
@@ -126,6 +127,24 @@ class _MyHomePageState extends State<MyHomePage> {
               },
               child: Text(
                 "Mouvement",
+              ),
+            ),
+            FlatButton(
+              color: PrimaryAssentColor,
+              textColor: Colors.white,
+              disabledColor: Colors.grey,
+              disabledTextColor: Colors.black,
+              padding: EdgeInsets.all(8.0),
+              splashColor: Colors.blueAccent,
+              onPressed: () {
+                Navigator.push(context,
+                    MaterialPageRoute(
+                        builder: (context) => LigneDroite(0)
+                    )
+                );
+              },
+              child: Text(
+                "Ligne",
               ),
             ),
           ],
