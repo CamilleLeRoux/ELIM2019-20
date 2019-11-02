@@ -74,26 +74,31 @@ class _MyHomePageState extends State<MyHomePage> {
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
 
-            FlatButton(
-              color: PrimaryAssentColor,
-              textColor: Colors.white,
-              disabledColor: Colors.grey,
-              disabledTextColor: Colors.black,
-              padding: EdgeInsets.all(8.0),
-              splashColor: Colors.blueGrey[100],
-              onPressed: () {
-                Navigator.push(context,
-                    MaterialPageRoute(
-                        builder: (context) => EndOk()
-                        //builder: (context) => StateQuizz().getNextTest("main")
-                    )
-                );
-              },
-              child: Text(
-                "Commencer le test!",
+            Container(
+            child:FlatButton(
+                color: PrimaryAssentColor,
+                textColor: Colors.white,
+                disabledColor: Colors.grey,
+                disabledTextColor: Colors.black,
+                padding: EdgeInsets.all(8.0),
+                splashColor: Colors.blueGrey[100],
+                onPressed: () {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => StateQuizz().getNextTest("main")
+                      )
+                  );
+                },
+                child: Text(
+                  "Commencer le test!",
+                  style: TextStyle(fontSize: 40.0),
+                  textAlign: TextAlign.center,
+                ),
               ),
+              height: 140,
+              margin: EdgeInsets.fromLTRB(10.0, 20.0, 10.0, 10.0),
             ),
             FlatButton(
               color: PrimaryAssentColor,
