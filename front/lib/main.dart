@@ -147,6 +147,24 @@ class _MyHomePageState extends State<MyHomePage> {
                 "Ligne",
               ),
             ),
+            FlatButton(
+              color: PrimaryAssentColor,
+              textColor: Colors.white,
+              disabledColor: Colors.grey,
+              disabledTextColor: Colors.black,
+              padding: EdgeInsets.all(8.0),
+              splashColor: Colors.blueAccent,
+              onPressed: () {
+                Navigator.push(context,
+                    MaterialPageRoute(
+                        builder: (context) => TestBdd()
+                    )
+                );
+              },
+              child: Text(
+                "Test bdd",
+              ),
+            ),
           ],
         ),
 
