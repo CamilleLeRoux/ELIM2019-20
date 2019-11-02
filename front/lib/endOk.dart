@@ -30,130 +30,20 @@ class EndOkState extends State<EndOk>{
           backgroundColor: PrimaryColor,
           body: Center(
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 Container(
-                  child:Column(
-                    children: <Widget>[
-                      Container(
-                        child: FlatButton(
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceAround,
-                            children: [
-                              Text(
-                                "AMI",
-                                style: TextStyle(fontSize: 40.0),
-                              ),
-                              Image.asset(
-                                "assets/phone.png",
-                                width: 72,
-                              )
-                            ],
-                          ),
-                          color: PrimaryAssentColor,
-                          textColor: Colors.white,
-                          disabledColor: Colors.grey,
-                          disabledTextColor: Colors.black,
+                  child: Text("Bravo!! Ton taux d'alcoolémie semble correct!",
+                  textAlign: TextAlign.center,
+                  style: TextStyle(fontSize: 40.0, color: Colors.white),),
+                  margin: EdgeInsets.fromLTRB(0.0, 0.0, 0.0, 40.0),
 
-                          onPressed: () {
-                            callFriend();
-                          },
-                        ),
-                        height: 100,
-                        margin: EdgeInsets.fromLTRB(10.0, 20.0, 10.0, 10.0),
-                      ),
-                      Container(
-                        child: FlatButton(
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceAround,
-                            children: [
-                              Text(
-                                "MAISON",
-                                style: TextStyle(fontSize: 40.0),
-                              ),
-                              Image.asset(
-                                "assets/walk.png",
-                                width: 72,
-                              )
-                            ],
-                          ),
-
-                          color: PrimaryAssentColor,
-                          textColor: Colors.white,
-                          disabledColor: Colors.grey,
-                          disabledTextColor: Colors.black,
-
-                          onPressed: () {
-                            openMaps();
-                          },
-                        ),
-                        height: 100,
-                        margin: EdgeInsets.fromLTRB(10.0, 10.0, 10.0, 10.0),
-                      ),
-
-                    ],
-
-                  )
                 ),
-                Container(
-                  child:Column(
-                    children: <Widget>[
-                      Container(
-                        child: FlatButton(
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceAround,
-                            children: [
-                              Text(
-                                "HOTEL",
-                                style: TextStyle(fontSize: 40.0),
-                              ),
-                              Image.asset(
-                                "assets/bed.png",
-                                width: 72,
-                              )
-                            ],
-                          ),
-                          color: PrimaryAssentColor,
-                          textColor: Colors.white,
-                          disabledColor: Colors.grey,
-                          disabledTextColor: Colors.black,
-                          onPressed: () {
-                            openHotel();
-                          },
-                        ),
-                        height: 100,
-                        margin: EdgeInsets.fromLTRB(10.0, 10.0, 10.0, 10.0),
-                      ),
-                      Container(
-                        child: FlatButton(
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceAround,
-                            children: [
-                              Text(
-                                "TAXI",
-                                style: TextStyle(fontSize: 40.0),
-                              ),
-                              Image.asset(
-                                "assets/taxi.png",
-                                width: 72,
-                              )
-                            ],
-                          ),
-                          color: PrimaryAssentColor,
-                          textColor: Colors.white,
-                          disabledColor: Colors.grey,
-                          disabledTextColor: Colors.black,
-                          onPressed: () {
-                            openTaxi();
-                          },
-                        ),
-                        height: 100,
-                        margin: EdgeInsets.fromLTRB(10.0, 10.0, 10.0, 10.0),
-                      ),
-                    ],
-                  )
-                ),
+                Image.asset(
+                  "assets/icon.png",
+                  width: 170,
+                )
               ],
 
 
