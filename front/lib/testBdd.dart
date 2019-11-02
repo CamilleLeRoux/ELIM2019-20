@@ -7,8 +7,8 @@ class TestBdd extends StatelessWidget {
 
   Widget _buildList(BuildContext context, DocumentSnapshot document) {
     return ListTile(
-      title: Text(document['name']),
-      subtitle: Text(document['temps'].toString()),
+      title: Text(document['idUser'].toString()),
+      subtitle: Text(document['score'].toString()),
     );
   }
 
@@ -20,7 +20,7 @@ class TestBdd extends StatelessWidget {
         children: <Widget>[
           Expanded(
             child: StreamBuilder(
-              stream: Firestore.instance.collection('test').snapshots(),
+              stream: Firestore.instance.collection('sentenceTest').snapshots(),
               //print an integer every 2secs, 10 times
               builder: (context, snapshot) {
                 if (!snapshot.hasData) {
@@ -28,7 +28,7 @@ class TestBdd extends StatelessWidget {
                 }
                 return ListView.builder(
                   itemExtent: 80.0,
-                  itemCount: 2,
+                  itemCount: snapshot.data.documents.length,
                   itemBuilder: (context, index) {
                     return _buildList(context, snapshot.data.documents[index]);
                   },
@@ -56,6 +56,6 @@ class TestBdd extends StatelessWidget {
   }
 
   void add() {
-    Firestore.instance.collection('sentenceTest').add({"score": 12, "idUser": "yolo"});
+    Firestore.instance.collection('sentenceTest').add({"score": 27, "idUser": "tutu"});
   }
 }
