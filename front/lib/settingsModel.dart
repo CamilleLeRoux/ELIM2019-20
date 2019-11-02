@@ -1,8 +1,12 @@
 class SettingsModel{
 
   String name = '';
-  String address = '';
+  String address = 'Résidence les dolines';
   DateTime beginningParty;
-  String friendsNumber = '';
+  String friendsNumber = '0623565261';
+
+  String getNumber(){
+    return friendsNumber;
+  }
 
 }

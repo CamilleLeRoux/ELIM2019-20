@@ -3,15 +3,15 @@ import 'package:front/Mouvement/CountMouvement.dart';
 import 'package:front/Sentence/sentence.dart';
 import 'package:front/main.dart';
 import 'package:front/settings.dart';
-
+import 'package:front/ligneDroite.dart';
+import 'package:front/endOk.dart';
 import 'dart:math';
 
 class StateQuizz {
   static final StateQuizz _instance = StateQuizz._internal();
 
-  var tests = ["mvt", "sentence"];
+  var tests = ["mvt", "ligneDroite"];
   var comingFromMain = false;
-  StatefulWidget widgetFromMain;
 
 
   factory StateQuizz(){
@@ -23,20 +23,18 @@ class StateQuizz {
   StatefulWidget getNextTest(comingFrom){
     if(tests.isEmpty){
       print("fin du quizz");
-      return Settings();
+      return EndOk();
     }else{
 
       if(!comingFromMain) {
         comingFromMain = true;
-        print(tests);
-        widgetFromMain = launchWidget(chooseTest());
-        return widgetFromMain;
+        return new Sentence();
       }
       else if(comingFrom == ""){
         return launchWidget(chooseTest());
       }
       else{
-        return widgetFromMain;
+        return new Sentence();
       }
     }
   }
@@ -47,9 +45,9 @@ class StateQuizz {
       tests.removeAt(value);
       return CountMouvement(0);
     }
-    else if (tests[value] == "sentence") {
+    else if (tests[value] == "ligneDroite") {
       tests.removeAt(value);
-      return Sentence();
+      return LigneDroite(0);
     }
   }
 

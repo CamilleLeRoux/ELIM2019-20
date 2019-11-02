@@ -8,6 +8,7 @@ import 'package:front/Mouvement/CountMouvement.dart';
 import 'package:front/colors.dart';
 import 'package:front/stateQuizz.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:front/endOk.dart';
 
 void main() {
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
@@ -85,7 +86,8 @@ class _MyHomePageState extends State<MyHomePage> {
               onPressed: () {
                 Navigator.push(context,
                     MaterialPageRoute(
-                        builder: (context) => StateQuizz().getNextTest("main")
+                        builder: (context) => EndOk()
+                        //builder: (context) => StateQuizz().getNextTest("main")
                     )
                 );
               },
