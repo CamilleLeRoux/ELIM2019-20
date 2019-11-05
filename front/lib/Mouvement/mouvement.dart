@@ -10,6 +10,7 @@ import 'dart:async';
 import 'package:front/Sentence/succes.dart';
 import 'package:front/colors.dart';
 import 'package:front/stateQuizz.dart';
+import 'package:front/BDD/DatabaseService.dart';
 
 class Mouvement extends StatefulWidget{
   final int counterPage;
@@ -129,6 +130,7 @@ class MouvementFormState extends State<Mouvement>{
         if (_start <= 0) {
           timer.cancel();
           accel.cancel();
+          DatabaseService().createMovementTest(_success);
           if(widget.counterPage == 3){
             Navigator.push(context,
                 MaterialPageRoute(

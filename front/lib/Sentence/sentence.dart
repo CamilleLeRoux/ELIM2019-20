@@ -6,6 +6,7 @@ import 'package:front/Sentence/succes.dart';
 import 'package:front/colors.dart';
 
 import 'package:front/Sentence/failure.dart';
+import 'package:front/BDD/DatabaseService.dart';
 
 class Sentence extends StatefulWidget {
   @override
@@ -137,6 +138,9 @@ class SentenceFormState extends State<Sentence>{
     if(w.length > 3 && w[2] == word3[choose[2]]) ++score;
     if(w.length > 4 && w[3] == word4[choose[3]]) ++score;
     print("Score : " + score.toString());
+
+
+    DatabaseService().createSentenceTest(score);
 
     if(score == 4){
       _timer.cancel();

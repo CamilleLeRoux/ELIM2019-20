@@ -56,6 +56,7 @@ class TestBdd extends StatelessWidget {
   }
 
   void add() {
-    Firestore.instance.collection('sentenceTest').add({"score": 27, "idUser": "tutu"});
+    Firestore.instance.collection('sentenceTest').add({"score": 27, "idUser":
+    "tutu3"});
   }
 }

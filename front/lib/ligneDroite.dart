@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:sensors/sensors.dart';
+import 'package:front/BDD/DatabaseService.dart';
 
 import 'colors.dart';
 
