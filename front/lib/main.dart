@@ -7,8 +7,7 @@ import 'settings.dart';
 import 'package:front/Mouvement/CountMouvement.dart';
 import 'package:front/colors.dart';
 import 'package:front/stateQuizz.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:front/endOk.dart';
+
 
 void main() {
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);

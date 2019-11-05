@@ -2,7 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:front/Mouvement/CountMouvement.dart';
 import 'package:front/Sentence/sentence.dart';
 import 'package:front/ligneDroite.dart';
-import 'package:front/endOk.dart';
+import 'package:front/BDD/DatabaseService.dart';
+import 'package:front/settings.dart';
+import 'package:front/kMeans.dart';
+
 import 'dart:math';
 
 class StateQuizz {
@@ -11,6 +14,8 @@ class StateQuizz {
   var tests = ["mvt", "ligneDroite"];
   var comingFromMain = false;
   bool drunk = true;
+  int score = 0;
+  kMeans kmeans = new kMeans();
 
   factory StateQuizz(){
     return _instance;
@@ -20,10 +25,15 @@ class StateQuizz {
 
   StatefulWidget getNextTest(comingFrom){
     if(tests.isEmpty){
-      print("fin du quizz");
-      return EndOk();
+      DatabaseService().addScore(score, drunk);
+      if(drunk){
+        return kmeans.kMeansScore(score);
+      }else{
+        return Settings();
+      }
     }else{
       if(!comingFromMain) {
+        DatabaseService().getScores();
         comingFromMain = true;
         if(comingFrom == "settings"){
            drunk = false;
@@ -38,6 +48,7 @@ class StateQuizz {
       }
     }
   }
+
   StatefulWidget launchWidget(value){
     print("va chercher une autre page " + value.toString() + "  "
         + tests[value]);

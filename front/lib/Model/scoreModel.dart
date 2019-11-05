@@ -1,12 +1,10 @@
-class SentenceModel{
-  String idUser;
+class ScoreModel{
   int score;
   String timeStamp;
   bool drunk;
 
 
-  SentenceModel(idUser, score, timeStamp, drunk){
-    this.idUser = idUser;
+  ScoreModel(score, timeStamp, drunk){
     this.score = score;
     this.timeStamp = timeStamp;
     this.drunk = drunk;

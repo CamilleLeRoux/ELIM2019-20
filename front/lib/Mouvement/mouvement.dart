@@ -7,7 +7,6 @@ import 'dart:async';
 
 import 'package:front/colors.dart';
 import 'package:front/stateQuizz.dart';
-import 'package:front/BDD/DatabaseService.dart';
 
 class Mouvement extends StatefulWidget{
   final int counterPage;
@@ -23,7 +22,6 @@ class MouvementFormState extends State<Mouvement>{
   int _movementNB;
   var url = "assets/";
   int _start = 2;
-  Timer _timer;
   bool _success = false;
 
   //Accelerometre variables
@@ -127,7 +125,11 @@ class MouvementFormState extends State<Mouvement>{
         if (_start <= 0) {
           timer.cancel();
           accel.cancel();
-          DatabaseService().createMovementTest(_success, StateQuizz().drunk);
+
+          if(_success){
+            StateQuizz().score += 1;
+          }
+
           if(widget.counterPage == 3){
             Navigator.push(context,
                 MaterialPageRoute(

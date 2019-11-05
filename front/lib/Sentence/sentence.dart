@@ -6,7 +6,6 @@ import 'package:front/Sentence/succes.dart';
 import 'package:front/colors.dart';
 
 import 'package:front/Sentence/failure.dart';
-import 'package:front/BDD/DatabaseService.dart';
 import 'package:front/stateQuizz.dart';
 
 
@@ -142,7 +141,7 @@ class SentenceFormState extends State<Sentence>{
     print("Score : " + score.toString());
 
 
-    DatabaseService().createSentenceTest(score, StateQuizz().drunk);
+    StateQuizz().score += score;
 
     if(score == 4){
       _timer.cancel();

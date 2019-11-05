@@ -2,7 +2,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 import 'colors.dart';
-import 'package:front/BDD/DatabaseService.dart';
 import 'package:front/kMeans.dart';
 
 class TestBdd extends StatelessWidget {
@@ -58,8 +57,7 @@ class TestBdd extends StatelessWidget {
   }
 
   void add() {
-    kMeans kmeans = new kMeans();
-    kmeans.kMeansSentence();
-    //DatabaseService().getSentenceData();
+    kMeans().kMeansScore(3);
+
   }
 }
