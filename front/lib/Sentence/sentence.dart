@@ -7,6 +7,8 @@ import 'package:front/colors.dart';
 
 import 'package:front/Sentence/failure.dart';
 import 'package:front/BDD/DatabaseService.dart';
+import 'package:front/stateQuizz.dart';
+
 
 class Sentence extends StatefulWidget {
   @override
@@ -140,7 +142,7 @@ class SentenceFormState extends State<Sentence>{
     print("Score : " + score.toString());
 
 
-    DatabaseService().createSentenceTest(score);
+    DatabaseService().createSentenceTest(score, StateQuizz().drunk);
 
     if(score == 4){
       _timer.cancel();

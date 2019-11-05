@@ -3,7 +3,8 @@ import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 import 'package:intl/intl.dart';
 
 import 'Sentence/sentence.dart';
-import 'main.dart';
+
+import 'package:front/stateQuizz.dart';
 import 'settingsModel.dart';
 import 'package:front/colors.dart';
 
@@ -159,6 +160,24 @@ class SettingsFormState extends State<Settings>{
                       }
                   },
                   child: Text('Enregistrer'),
+                ),
+                FlatButton(
+                  color: PrimaryAssentColor,
+                  textColor: Colors.white,
+                  disabledColor: Colors.grey,
+                  disabledTextColor: Colors.black,
+                  padding: EdgeInsets.all(8.0),
+                  splashColor: Colors.blueAccent,
+                  onPressed: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(
+                            builder: (context) => StateQuizz().getNextTest("settings")
+                        )
+                    );
+                  },
+                  child: Text(
+                    "Tests non alcoolisé!",
+                  ),
                 ),
               ],
             ),

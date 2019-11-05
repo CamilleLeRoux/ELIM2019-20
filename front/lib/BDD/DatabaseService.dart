@@ -13,14 +13,14 @@ class DatabaseService{
 
   DatabaseService._internal();
 
-  createMovementTest(bool _success){
+  createMovementTest(bool _success, bool drunk){
     return _db.collection('movementTest').document().setData({"idUser":
-    idUser,"success": _success, "timeStamp": DateTime.now().toString()});
+    idUser,"success": _success, "timeStamp": DateTime.now().toString(), "drunk": drunk});
   }
 
-  createSentenceTest(int score){
+  createSentenceTest(int score, bool drunk){
     _db.collection('sentenceTest').add({"score": score, "idUser":
-    idUser, "timeStamp": DateTime.now().toString()});
+    idUser, "timeStamp": DateTime.now().toString(), "drunk": drunk});
   }
 
 }

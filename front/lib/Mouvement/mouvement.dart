@@ -1,13 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:front/Sentence/failure.dart';
-import 'package:front/main.dart';
 
 import 'package:front/Mouvement/CountMouvement.dart';
 import 'package:sensors/sensors.dart';
 import 'dart:math';
 import 'dart:async';
 
-import 'package:front/Sentence/succes.dart';
 import 'package:front/colors.dart';
 import 'package:front/stateQuizz.dart';
 import 'package:front/BDD/DatabaseService.dart';
@@ -130,7 +127,7 @@ class MouvementFormState extends State<Mouvement>{
         if (_start <= 0) {
           timer.cancel();
           accel.cancel();
-          DatabaseService().createMovementTest(_success);
+          DatabaseService().createMovementTest(_success, StateQuizz().drunk);
           if(widget.counterPage == 3){
             Navigator.push(context,
                 MaterialPageRoute(

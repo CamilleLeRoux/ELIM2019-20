@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:front/Mouvement/CountMouvement.dart';
 import 'package:front/Sentence/sentence.dart';
-import 'package:front/main.dart';
-import 'package:front/settings.dart';
 import 'package:front/ligneDroite.dart';
 import 'package:front/endOk.dart';
 import 'dart:math';
@@ -12,7 +10,7 @@ class StateQuizz {
 
   var tests = ["mvt", "ligneDroite"];
   var comingFromMain = false;
-
+  bool drunk = true;
 
   factory StateQuizz(){
     return _instance;
@@ -25,9 +23,11 @@ class StateQuizz {
       print("fin du quizz");
       return EndOk();
     }else{
-
       if(!comingFromMain) {
         comingFromMain = true;
+        if(comingFrom == "settings"){
+           drunk = false;
+        }
         return new Sentence();
       }
       else if(comingFrom == ""){
