@@ -22,6 +22,7 @@ dependencies:
     sdk: flutter
   url_launcher: ^5.2.5
   k_means_cluster: ^0.2.2
+  scheduled_notifications: ^1.0.0
 
 
   # The following adds the Cupertino Icons font to your application.

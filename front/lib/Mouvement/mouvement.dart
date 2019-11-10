@@ -120,7 +120,7 @@ class MouvementFormState extends State<Mouvement>{
 
   void startTimer() {
     const oneSec = const Duration(seconds: 1);
-    _timer = new Timer.periodic(
+    var _timer = new Timer.periodic(
       oneSec, (Timer timer) => setState(() {
         if (_start <= 0) {
           timer.cancel();
