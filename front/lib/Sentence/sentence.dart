@@ -140,7 +140,7 @@ class SentenceFormState extends State<Sentence>{
     if(w.length > 1 && w[0] == word1[choose[0]]) ++score;
     if(w.length > 2 && w[1] == word2[choose[1]]) ++score;
     if(w.length > 3 && w[2] == word3[choose[2]]) ++score;
-    if(w.length > 4 && w[3] == word4[choose[3]]) ++score;
+    if(w.length == 4 && w[3] == word4[choose[3]]) ++score;
     print("Score : " + score.toString());
 
 
