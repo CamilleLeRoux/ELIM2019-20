@@ -9,6 +9,9 @@ import 'package:front/stateQuizz.dart';
 import 'colors.dart';
 
 class TestBille extends StatefulWidget {
+  final int counterPage;
+
+  TestBille(this.counterPage, {Key key}): super(key: key);
 
   @override
   TestBilleState createState() => TestBilleState();

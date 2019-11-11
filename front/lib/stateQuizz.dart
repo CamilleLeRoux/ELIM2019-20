@@ -8,10 +8,12 @@ import 'package:front/kMeans.dart';
 
 import 'dart:math';
 
+import 'package:front/testBille.dart';
+
 class StateQuizz {
   static final StateQuizz _instance = StateQuizz._internal();
 
-  var tests = ["mvt", "ligneDroite"];
+  var tests = ["mvt", "ligneDroite", "sentence", "bille"];
   var comingFromMain = false;
   bool drunk = true;
   int score = 0;
@@ -38,13 +40,13 @@ class StateQuizz {
         if(comingFrom == "settings"){
            drunk = false;
         }
-        return new Sentence();
+        return new Sentence(0);
       }
       else if(comingFrom == ""){
         return launchWidget(chooseTest());
       }
       else{
-        return new Sentence();
+        return new Sentence(0);
       }
     }
   }
@@ -55,10 +57,15 @@ class StateQuizz {
     if (tests[value] == "mvt") {
       tests.removeAt(value);
       return CountMouvement(0);
-    }
-    else if (tests[value] == "ligneDroite") {
+    }else if (tests[value] == "ligneDroite") {
       tests.removeAt(value);
       return LigneDroite(0);
+    }else if (tests[value] == "sentence") {
+      tests.removeAt(value);
+      return Sentence(0);
+    }else if (tests[value] == "bille") {
+      tests.removeAt(value);
+      return TestBille(0);
     }
   }
 

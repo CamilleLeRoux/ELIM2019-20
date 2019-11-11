@@ -110,7 +110,7 @@ class _MyHomePageState extends State<MyHomePage> {
               onPressed: () {
                 Navigator.push(context,
                     MaterialPageRoute(
-                        builder: (context) => Sentence()
+                        builder: (context) => Sentence(0)
                     )
                 );
               },
@@ -164,7 +164,7 @@ class _MyHomePageState extends State<MyHomePage> {
               onPressed: () {
                 Navigator.push(context,
                     MaterialPageRoute(
-                        builder: (context) => TestBille()
+                        builder: (context) => TestBille(0)
                     )
                 );
               },

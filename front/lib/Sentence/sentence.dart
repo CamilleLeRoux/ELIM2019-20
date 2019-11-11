@@ -10,6 +10,9 @@ import 'package:front/stateQuizz.dart';
 
 
 class Sentence extends StatefulWidget {
+  final int counterPage;
+
+  Sentence(this.counterPage, {Key key}): super(key: key);
   @override
   SentenceFormState createState(){
     return SentenceFormState();
