@@ -1,8 +1,9 @@
 import 'dart:async';
+import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:front/stateQuizz.dart';
 import 'package:sensors/sensors.dart';
-import 'package:front/BDD/DatabaseService.dart';
 
 import 'colors.dart';
 
@@ -18,43 +19,71 @@ class LigneDroiteState extends State<LigneDroite> with TickerProviderStateMixin 
 
   int diff = 3;
   bool first = true;
+
   var valueAcc = {
     "x": 0.0,
     "y": 0.0,
     "z": 0.0,
   };
 
+  int badpoints = 0;
   StreamSubscription accel;
+  double angle = 0.0;
 
-  AlignmentDirectional ironManAlignment = AlignmentDirectional(0.0, 1);
+  Animation<Offset> _arrowAnimation;
+  AnimationController _arrowAnimationController;
 
   @override
   void initState(){
     super.initState();
+
+    _arrowAnimationController =
+        AnimationController(vsync: this, duration: Duration(milliseconds: 3000));
+    _arrowAnimation =
+        Tween<Offset>(begin: Offset.zero, end: Offset(0.0, -4.2))
+            .animate(_arrowAnimationController);
+
+    _arrowAnimationController.addStatusListener((status) {
+      if(status == AnimationStatus.completed) {
+        if(badpoints < 5){
+          StateQuizz().score += 1;
+        }
+        Navigator.push(context,
+            MaterialPageRoute(
+                builder: (context) => StateQuizz().getNextTest("")
+            )
+        );
+      }
+    });
+
     accel = accelerometerEvents.listen((AccelerometerEvent event) {
       if(first){
         valueAcc["x"] = double.parse(event.x.toString());
         valueAcc["y"] = double.parse(event.y.toString());
         valueAcc["z"] = double.parse(event.z.toString());
-        print(valueAcc);
+        //print(valueAcc);
         first = false;
       }
 
-      print(double.parse(event.y.toString()));
+      //print(double.parse(event.y.toString()));
 
-      if(double.parse(event.y.toString()) + 0.3  < valueAcc["y"] ){
+      if(double.parse(event.y.toString()) + 0.5  < valueAcc["y"] ){
         print("droite");
-        droite();
+        right();
         new Future.delayed(const Duration(seconds: 1));
         first = true;
       }
 
-      if(double.parse(event.y.toString())  > valueAcc["y"] + 0.3){
+      if(double.parse(event.y.toString())  > valueAcc["y"] + 0.5){
         print("gauche");
-        gauche();
+        left();
         new Future.delayed(const Duration(seconds: 1));
         first = true;
       }
+
+      WidgetsBinding.instance
+          .addPostFrameCallback((_) => move());
+
     });
   }
 
@@ -67,82 +96,62 @@ class LigneDroiteState extends State<LigneDroite> with TickerProviderStateMixin 
           backgroundColor: PrimaryColor,
           automaticallyImplyLeading: false
       ),
-      body: Stack(
-        children: <Widget>[
-          AnimatedContainer(
-            duration: Duration(seconds: 3),
-            alignment: ironManAlignment,
-            child: Container(
-              height: 150,
-              width: 50,
-              child: Image.asset('assets/drunk.png'),
+      body: Center(
+          child:
+              Align(
+                alignment: Alignment.bottomCenter,
+                child: SlideTransition(
+                  position: _arrowAnimation,
+                  child: Transform.rotate(
+                    angle: angle,
+                    child: Icon(
+                      Icons.arrow_upward,
+                      size: 100.0,
+                      color: Colors.black,
+                    ),
+                  ),
             ),
-          ),
-          Row(
-            children: <Widget>[
-              Align(
-                alignment: AlignmentDirectional.bottomCenter,
-                child: RaisedButton(
-                  onPressed: () {
-                    move();
-                  },
-                  child: Text('Go'),
-                  color: Colors.red,
-                  textColor: Colors.yellowAccent,
-                  shape: BeveledRectangleBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(20))),
-                ),
               ),
-              Align(
-                alignment: AlignmentDirectional.bottomCenter,
-                child: RaisedButton(
-                  onPressed: () {
-                    gauche();
-                  },
-                  child: Text('gauche'),
-                  color: Colors.red,
-                  textColor: Colors.yellowAccent,
-                  shape: BeveledRectangleBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(20))),
-                ),
-              ),
-              Align(
-                alignment: AlignmentDirectional.bottomCenter,
-                child: RaisedButton(
-                  onPressed: () {
-                    droite();
-                  },
-                  child: Text('droite'),
-                  color: Colors.red,
-                  textColor: Colors.yellowAccent,
-                  shape: BeveledRectangleBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(20))),
-                ),
-              ),
-            ],
-          ),
-
-        ],
-      ),
+      )
     );
   }
 
-  void move() {
+  void right(){
     setState(() {
-      ironManAlignment = AlignmentDirectional(0.0,-1);
+      double newAngle = angle + 0.5;
+      if (newAngle <= pi/2) {
+        angle = newAngle;
+      }else{
+        angle = pi/2;
+      }
+
+      if (angle > pi/4){
+        ++badpoints;
+      }
+      print(badpoints);
     });
   }
 
-  void droite() {
+  void left(){
     setState(() {
-      ironManAlignment = AlignmentDirectional(1.0,0.0);
+      double newAngle = angle - 0.5;
+      if (newAngle >= -pi/2){
+        angle = newAngle;
+      }else{
+        angle = -pi/2;
+      }
+
+      if (angle < -pi/4){
+        ++badpoints;
+      }
+      print(badpoints);
     });
   }
 
-  void gauche() {
-    setState(() {
-      ironManAlignment = AlignmentDirectional(-1.0,0.0);
-    });
+  void move(){
+    _arrowAnimationController.forward();
   }
+
+
 
 }
