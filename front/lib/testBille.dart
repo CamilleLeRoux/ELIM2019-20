@@ -1,8 +1,10 @@
 import 'dart:async';
+import 'dart:io';
 import 'dart:math';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:front/stateQuizz.dart';
 
 import 'colors.dart';
 
@@ -15,10 +17,11 @@ class TestBille extends StatefulWidget {
 class TestBilleState extends State<TestBille> {
 
   Timer _timer;
-  int _start = 5;
+  int _start = 10;
 
   int last = 0;
   int points = 0;
+  int touch = 0;
 
   var colors = [];
 
@@ -29,6 +32,9 @@ class TestBilleState extends State<TestBille> {
     for(int i = 0; i < 16; ++i){
       colors.add(Colors.white);
     }
+
+    WidgetsBinding.instance
+        .addPostFrameCallback((_) =>  moveBille());
   }
 
   Widget build(BuildContext context) {
@@ -96,7 +102,15 @@ class TestBilleState extends State<TestBille> {
             () {
           if (_start <= 0) {
             _timer.cancel();
-            moveBille();
+            if(points > 10){
+              StateQuizz().score += 1;
+              print("Victory !");
+            }
+            Navigator.push(context,
+                MaterialPageRoute(
+                    builder: (context) => StateQuizz().getNextTest("")
+                )
+            );
           } else {
             _start = _start - 1;
           }
@@ -106,6 +120,8 @@ class TestBilleState extends State<TestBille> {
   }
 
   void moveBille(){
+    colors[touch] = Colors.white;
+    colors[last] = Colors.white;
     final _random = new Random();
     last = _random.nextInt(16);
     setState(() {
@@ -114,9 +130,22 @@ class TestBilleState extends State<TestBille> {
   }
 
   void verif(int i){
+    print(i);
+    print(last);
+    touch = i;
     if (i == last){
       ++points;
-      colors[last] = Colors.white;
+      moveBille();
+    }else{
+      setState(() {
+        colors[touch] = Colors.red;
+      });
+      --points;
+      print(colors[touch]);
+      print(colors[i]);
+      print("bad");
+      sleep(new Duration(seconds: 1));
+      print("bad bad");
       moveBille();
     }
   }
