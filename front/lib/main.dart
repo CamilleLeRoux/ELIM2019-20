@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:front/ligneDroite.dart';
 import 'package:front/testBdd.dart';
+import 'package:front/testBille.dart';
 import 'Sentence/sentence.dart';
 import 'settings.dart';
 import 'package:front/Mouvement/CountMouvement.dart';
@@ -151,6 +152,24 @@ class _MyHomePageState extends State<MyHomePage> {
               },
               child: Text(
                 "Ligne",
+              ),
+            ),
+            FlatButton(
+              color: PrimaryAssentColor,
+              textColor: Colors.white,
+              disabledColor: Colors.grey,
+              disabledTextColor: Colors.black,
+              padding: EdgeInsets.all(8.0),
+              splashColor: Colors.blueAccent,
+              onPressed: () {
+                Navigator.push(context,
+                    MaterialPageRoute(
+                        builder: (context) => TestBille()
+                    )
+                );
+              },
+              child: Text(
+                "Bille",
               ),
             ),
             FlatButton(
