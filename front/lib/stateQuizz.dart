@@ -31,6 +31,9 @@ class StateQuizz {
       if(drunk){
         return kmeans.kMeansScore(score);
       }else{
+        print("hello" + tests.length.toString());
+        initate();
+        print("hello 2" + tests.length.toString());
         return Settings();
       }
     }else{
@@ -66,6 +69,13 @@ class StateQuizz {
     }
   }
 
+  void initate(){
+    if(tests.length < 3)
+      tests = ["mvt", "ligneDroite", "bille"];
+    comingFromMain = false;
+    drunk = true;
+    score = 0;
+  }
 
   int chooseTest(){
     final _random = new Random();
