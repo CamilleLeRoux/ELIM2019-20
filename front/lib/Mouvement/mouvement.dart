@@ -89,11 +89,6 @@ class MouvementFormState extends State<Mouvement>{
     return new WillPopScope(
         child: Scaffold(
           backgroundColor: PrimaryColor,
-          appBar: AppBar(
-              title: Text("Test du mouvement"),
-              backgroundColor: PrimaryColor,
-              automaticallyImplyLeading: false
-          ),
           body: Center(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,

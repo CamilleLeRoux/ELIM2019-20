@@ -13,7 +13,7 @@ import 'package:front/testBille.dart';
 class StateQuizz {
   static final StateQuizz _instance = StateQuizz._internal();
 
-  var tests = ["mvt", "ligneDroite", "sentence", "bille"];
+  var tests = ["mvt", "ligneDroite", "bille"];
   var comingFromMain = false;
   bool drunk = true;
   int score = 0;
@@ -60,9 +60,6 @@ class StateQuizz {
     }else if (tests[value] == "ligneDroite") {
       tests.removeAt(value);
       return LigneDroite(0);
-    }else if (tests[value] == "sentence") {
-      tests.removeAt(value);
-      return Sentence(0);
     }else if (tests[value] == "bille") {
       tests.removeAt(value);
       return TestBille(0);

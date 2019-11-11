@@ -37,7 +37,24 @@ class kMeans{
         print(" - $instance");
       }
     }
-    if(id == "cluster[0]")
+
+    var drunk = 0;
+    var notdrunk = 0;
+
+
+    for(final cluster in clusters){
+      if(cluster.id==id){
+        for(final instance in cluster.instances){
+          if(instance.id == "true"){
+            drunk++;
+          }else if(instance.id == "false"){
+            notdrunk++;
+          }
+        }
+      }
+    }
+
+    if(notdrunk>drunk)
       return EndOk();
     else
       return EndNOk();

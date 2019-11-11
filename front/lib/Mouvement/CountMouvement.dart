@@ -37,7 +37,7 @@ class CountMouvementFormState extends State<CountMouvement>{
           child:Scaffold(
             backgroundColor: PrimaryColor,
             appBar: AppBar(
-                title: Text("Test de la phrase"),
+                title: Text("Test du mouvement"),
                 backgroundColor: PrimaryColor,
                 automaticallyImplyLeading: false
             ),
