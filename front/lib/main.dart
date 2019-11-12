@@ -100,7 +100,7 @@ class _MyHomePageState extends State<MyHomePage> {
               height: 140,
               margin: EdgeInsets.fromLTRB(10.0, 20.0, 10.0, 10.0),
             ),
-            FlatButton(
+            /*FlatButton(
               color: PrimaryAssentColor,
               textColor: Colors.white,
               disabledColor: Colors.grey,
@@ -189,7 +189,7 @@ class _MyHomePageState extends State<MyHomePage> {
               child: Text(
                 "Test bdd",
               ),
-            ),
+            ),*/
           ],
         ),
 
