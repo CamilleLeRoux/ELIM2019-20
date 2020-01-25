@@ -3,11 +3,16 @@ import 'package:flutter/services.dart';
 import 'package:front/ligneDroite.dart';
 import 'package:front/testBdd.dart';
 import 'package:front/testBille.dart';
+import 'BDD/DatabaseID.dart';
+import 'BDD/DatabaseService.dart';
 import 'Sentence/sentence.dart';
 import 'settings.dart';
 import 'package:front/Mouvement/CountMouvement.dart';
 import 'package:front/colors.dart';
 import 'package:front/stateQuizz.dart';
+
+import 'package:shared_preferences/shared_preferences.dart';
+
 
 
 void main() {
@@ -39,6 +44,12 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+
+  @override
+  initState(){
+    super.initState();
+    checkIfID();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -76,7 +87,6 @@ class _MyHomePageState extends State<MyHomePage> {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
-
             Container(
             child:FlatButton(
                 color: PrimaryAssentColor,
@@ -100,100 +110,25 @@ class _MyHomePageState extends State<MyHomePage> {
               height: 140,
               margin: EdgeInsets.fromLTRB(10.0, 20.0, 10.0, 10.0),
             ),
-            /*FlatButton(
-              color: PrimaryAssentColor,
-              textColor: Colors.white,
-              disabledColor: Colors.grey,
-              disabledTextColor: Colors.black,
-              padding: EdgeInsets.all(8.0),
-              splashColor: Colors.blueAccent,
-              onPressed: () {
-                Navigator.push(context,
-                    MaterialPageRoute(
-                        builder: (context) => Sentence(0)
-                    )
-                );
-              },
-              child: Text(
-                "Phrase",
-              ),
-            ),
-            FlatButton(
-              color: PrimaryAssentColor,
-              textColor: Colors.white,
-              disabledColor: Colors.grey,
-              disabledTextColor: Colors.black,
-              padding: EdgeInsets.all(8.0),
-              splashColor: Colors.blueAccent,
-              onPressed: () {
-                Navigator.push(context,
-                    MaterialPageRoute(
-                        builder: (context) => CountMouvement(0)
-                    )
-                );
-              },
-              child: Text(
-                "Mouvement",
-              ),
-            ),
-            FlatButton(
-              color: PrimaryAssentColor,
-              textColor: Colors.white,
-              disabledColor: Colors.grey,
-              disabledTextColor: Colors.black,
-              padding: EdgeInsets.all(8.0),
-              splashColor: Colors.blueAccent,
-              onPressed: () {
-                Navigator.push(context,
-                    MaterialPageRoute(
-                        builder: (context) => LigneDroite(0)
-                    )
-                );
-              },
-              child: Text(
-                "Ligne",
-              ),
-            ),
-            FlatButton(
-              color: PrimaryAssentColor,
-              textColor: Colors.white,
-              disabledColor: Colors.grey,
-              disabledTextColor: Colors.black,
-              padding: EdgeInsets.all(8.0),
-              splashColor: Colors.blueAccent,
-              onPressed: () {
-                Navigator.push(context,
-                    MaterialPageRoute(
-                        builder: (context) => TestBille(0)
-                    )
-                );
-              },
-              child: Text(
-                "Bille",
-              ),
-            ),
-            FlatButton(
-              color: PrimaryAssentColor,
-              textColor: Colors.white,
-              disabledColor: Colors.grey,
-              disabledTextColor: Colors.black,
-              padding: EdgeInsets.all(8.0),
-              splashColor: Colors.blueAccent,
-              onPressed: () {
-                Navigator.push(context,
-                    MaterialPageRoute(
-                        builder: (context) => TestBdd()
-                    )
-                );
-              },
-              child: Text(
-                "Test bdd",
-              ),
-            ),*/
           ],
         ),
-
-      ), // This trailing comma makes auto-formatting nicer for build methods.
+      ),
     );
   }
+
+  checkIfID() async{
+    String _id = "";
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    _id = prefs.getString("idUser");
+    if(_id != "" && _id != null){
+      print("logged");
+    }else{
+      DatabaseService dbb = new DatabaseService();
+      dbb.addNewUser();
+      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)
+          => new Settings()));
+    }
+  }
+
+
 }

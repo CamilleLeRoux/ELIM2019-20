@@ -1,1 +1,1 @@
-const idUser = "1";
+String idUser = "";

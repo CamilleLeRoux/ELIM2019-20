@@ -27,21 +27,22 @@ class StateQuizz {
 
   StatefulWidget getNextTest(comingFrom){
     if(tests.isEmpty){
+
       DatabaseService().addScore(score, drunk);
       if(drunk){
         return kmeans.kMeansScore(score);
       }else{
-        print("hello" + tests.length.toString());
         initate();
-        print("hello 2" + tests.length.toString());
         return Settings();
       }
+
     }else{
+
       if(!comingFromMain) {
         DatabaseService().getScores();
         comingFromMain = true;
         if(comingFrom == "settings"){
-           drunk = false;
+          drunk = false;
         }
         return new Sentence(0);
       }
@@ -55,8 +56,8 @@ class StateQuizz {
   }
 
   StatefulWidget launchWidget(value){
-    print("va chercher une autre page " + value.toString() + "  "
-        + tests[value]);
+    print("va chercher une autre page " + tests[value]);
+
     if (tests[value] == "mvt") {
       tests.removeAt(value);
       return CountMouvement(0);
@@ -67,6 +68,7 @@ class StateQuizz {
       tests.removeAt(value);
       return TestBille(0);
     }
+
   }
 
   void initate(){

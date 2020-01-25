@@ -46,12 +46,14 @@ class LigneDroiteState extends State<LigneDroite> with TickerProviderStateMixin 
     _arrowAnimationController.addStatusListener((status) {
       if(status == AnimationStatus.completed) {
         accel.cancel();
+
         if(badpoints < 5){
           StateQuizz().score += 1;
         }
         Navigator.push(context,
             MaterialPageRoute(
                 builder: (context) => StateQuizz().getNextTest("")
+
             )
         );
       }

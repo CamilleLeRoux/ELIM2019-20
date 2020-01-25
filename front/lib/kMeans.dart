@@ -24,7 +24,7 @@ class kMeans{
     }).toList();
 
     instances.add(Instance([0, score], id:"new"));
-    List<Cluster> clusters = initialClusters(2, instances);
+    List<Cluster> clusters = initialClusters(3, instances);
 
     kmeans(clusters: clusters, instances: instances);
 
