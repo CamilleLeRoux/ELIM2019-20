@@ -3,6 +3,7 @@ import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 import 'package:intl/intl.dart';
 import 'package:scheduled_notifications/scheduled_notifications.dart';
 
+import 'BDD/DatabaseService.dart';
 import 'Sentence/sentence.dart';
 
 import 'package:front/stateQuizz.dart';
@@ -234,14 +235,13 @@ class SettingsFormState extends State<Settings>{
           final form = _formKey.currentState;
           if (form.validate()) {
             form.save();
-            Scaffold
-                .of(context)
-                .showSnackBar(SnackBar(content: Text
-              ('Enregistrement')));
+
             print("Settings : " + _settingsModel.name + "\nNum " +
                 _settingsModel.friendsNumber + "\nAdresse " +
                 _settingsModel.address + "\nHoraire de " +
                 _settingsModel.beginningParty.toString() + " a " + _settingsModel.endingParty.toString());
+            DatabaseService dbb = new DatabaseService();
+            dbb.saveId(_settingsModel.name);
             scheduleNotif();
             /* Navigator.push(context,
                           MaterialPageRoute(
@@ -276,71 +276,73 @@ class SettingsFormState extends State<Settings>{
   void scheduleNotif() async {
     final date1 = _settingsModel.beginningParty;
     final date2 = _settingsModel.endingParty;
-    final difference = date2
-        .difference(date1)
-        .inHours;
 
-    print(difference);
+    if(date1 != null && date2 != null) {
+      final difference = date2
+          .difference(date1)
+          .inHours;
 
-    int firstNotification = await ScheduledNotifications.scheduleNotification(
-        new DateTime.now()
-            .add(new Duration(seconds: 0))
-            .millisecondsSinceEpoch,
-        "",
-        "Notification",
-        "A partir du début de la soirée une notification toutes les heures");
+      print(difference);
 
-    switch (_selectedText) {
-      case 'Heures':
-        for (int i = 0; i < difference; ++i) {
+      int firstNotification = await ScheduledNotifications.scheduleNotification(
+          new DateTime.now()
+              .add(new Duration(seconds: 0))
+              .millisecondsSinceEpoch,
+          "",
+          "Notification",
+          "A partir du début de la soirée une notification toutes les heures");
+
+      switch (_selectedText) {
+        case 'Heures':
+          for (int i = 0; i < difference; ++i) {
+            int notificationId = await ScheduledNotifications
+                .scheduleNotification(
+                _settingsModel.beginningParty
+                    .add(new Duration(hours: i))
+                    .millisecondsSinceEpoch,
+                "Attention",
+                "Tu es en soirée",
+                "Fais le test avant d'utiliser ton tel");
+          }
+          print("Heures");
+          break;
+        case '30 minutes':
+          for (int i = 0; i < difference * 2; ++i) {
+            int notificationId = await ScheduledNotifications
+                .scheduleNotification(
+                _settingsModel.beginningParty
+                    .add(new Duration(minutes: 30 * i))
+                    .millisecondsSinceEpoch,
+                "Attention",
+                "Tu es en soirée",
+                "Fais le test avant d'utiliser ton tel");
+          }
+          print("30 minutes");
+          break;
+        case '10 minutes':
+          for (int i = 0; i < difference * 6; ++i) {
+            int notificationId = await ScheduledNotifications
+                .scheduleNotification(
+                _settingsModel.beginningParty
+                    .add(new Duration(minutes: 10 * i))
+                    .millisecondsSinceEpoch,
+                "Attention",
+                "Tu es en soirée",
+                "Fais le test avant d'utiliser ton tel");
+          }
+          print("10 minutes");
+          break;
+        default:
           int notificationId = await ScheduledNotifications
               .scheduleNotification(
               _settingsModel.beginningParty
-                  .add(new Duration(hours: i))
+                  .add(new Duration(seconds: 10))
                   .millisecondsSinceEpoch,
               "Attention",
               "Tu es en soirée",
               "Fais le test avant d'utiliser ton tel");
-        }
-        print("Heures");
-        break;
-      case '30 minutes':
-        for (int i = 0; i < difference * 2; ++i) {
-          int notificationId = await ScheduledNotifications
-              .scheduleNotification(
-              _settingsModel.beginningParty
-                  .add(new Duration(minutes: 30 * i))
-                  .millisecondsSinceEpoch,
-              "Attention",
-              "Tu es en soirée",
-              "Fais le test avant d'utiliser ton tel");
-        }
-        print("30 minutes");
-        break;
-      case '10 minutes':
-        for (int i = 0; i < difference * 6; ++i) {
-          int notificationId = await ScheduledNotifications
-              .scheduleNotification(
-              _settingsModel.beginningParty
-                  .add(new Duration(minutes: 10 * i))
-                  .millisecondsSinceEpoch,
-              "Attention",
-              "Tu es en soirée",
-              "Fais le test avant d'utiliser ton tel");
-        }
-        print("10 minutes");
-        break;
-      default:
-        int notificationId = await ScheduledNotifications.scheduleNotification(
-            _settingsModel.beginningParty
-                .add(new Duration(seconds: 10))
-                .millisecondsSinceEpoch,
-            "Attention",
-            "Tu es en soirée",
-            "Fais le test avant d'utiliser ton tel");
-        print("default");
+          print("default");
+      }
     }
   }
-
-
 }

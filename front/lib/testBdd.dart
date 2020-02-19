@@ -57,7 +57,7 @@ class TestBdd extends StatelessWidget {
   }
 
   void add() {
-    kMeans().kMeansScore(3);
+    //kMeans().kMeansScore(3);
 
   }
 }

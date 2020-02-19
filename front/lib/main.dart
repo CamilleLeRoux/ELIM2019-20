@@ -117,14 +117,12 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   checkIfID() async{
-    String _id = "";
+    String name = "";
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    _id = prefs.getString("idUser");
-    if(_id != "" && _id != null){
+    name = prefs.getString("name");
+    if(name != "" && name != null){
       print("logged");
     }else{
-      DatabaseService dbb = new DatabaseService();
-      dbb.addNewUser();
       Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)
           => new Settings()));
     }

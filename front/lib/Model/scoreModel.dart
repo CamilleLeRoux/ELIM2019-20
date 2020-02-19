@@ -1,14 +1,21 @@
 class ScoreModel{
   int score;
-  String timeStamp;
   bool drunk;
 
 
-  ScoreModel(score, timeStamp, drunk){
+  ScoreModel(score, drunk){
     this.score = score;
-    this.timeStamp = timeStamp;
     this.drunk = drunk;
   }
+
+  ScoreModel.fromJson(Map<String, dynamic> json)
+      : score = json['score'],
+        drunk = json['drunk'];
+
+  Map<String, dynamic> toJson() => {
+    'score': score,
+    'drunk': drunk,
+  };
 
 
 }

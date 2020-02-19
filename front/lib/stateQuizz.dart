@@ -18,6 +18,7 @@ class StateQuizz {
   bool drunk = true;
   int score = 0;
   kMeans kmeans = new kMeans();
+  List<String> scores;
 
   factory StateQuizz(){
     return _instance;
@@ -30,7 +31,7 @@ class StateQuizz {
 
       DatabaseService().addScore(score, drunk);
       if(drunk){
-        return kmeans.kMeansScore(score);
+        return kmeans.kMeansScore(scores, score);
       }else{
         initate();
         return Settings();
@@ -47,9 +48,15 @@ class StateQuizz {
         return new Sentence(0);
       }
       else if(comingFrom == ""){
+        DatabaseService().getScores().then((res){
+          scores = res;
+        });
         return launchWidget(chooseTest());
       }
       else{
+        DatabaseService().getScores().then((res){
+          scores = res;
+        });
         return new Sentence(0);
       }
     }
